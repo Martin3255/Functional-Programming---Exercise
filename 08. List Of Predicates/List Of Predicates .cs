@@ -1,0 +1,33 @@
+﻿List<Predicate<int>> predicates = new();
+
+int endRange = int.Parse(Console.ReadLine());
+
+HashSet<int> dividers = new HashSet<int>(Console.ReadLine()
+    .Split()
+    .Select(int.Parse))
+    .ToHashSet();
+
+int[] numbers = Enumerable.Range(1, endRange).ToArray();
+
+foreach (var divider in dividers)
+{
+    predicates.Add(p => p % divider == 0);
+}
+
+foreach (var number in numbers)
+{
+    bool isDivisible = true;
+
+    foreach (var match in predicates)
+    {
+        if (!match(number))
+        {
+            isDivisible = false;
+            break;
+        }
+    }
+    if (isDivisible)
+    {
+        Console.Write($"{number} ");
+    }
+}
